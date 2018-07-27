@@ -1,0 +1,35 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+      <li class="breadcrumb-item"><a routerLink="/browse">Browse</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Book detail</li>
+    </ol>
+</nav>
+<div class="row">
+  <div class="col-sm-4">
+   <img src="{{book.cover}}" alt="Book cover">
+  </div>
+  <div class="col-sm-8">
+    <h4>{{book.title}}</h4>
+    <label><strong>Autor:</strong></label>
+    <label>{{book.author}}</label>
+    <br/>
+    <label><strong>Category:</strong></label>
+    <label>{{book.category}}</label>
+    <br/>
+    <label><strong>ISBN:</strong></label>
+    <label>{{book.isbn}}</label>
+    <br/>
+    <label><strong>Publisher:</strong></label>
+    <label>{{book.publisher}}</label>
+    <br/> 
+    <label><strong>ISBN:</strong></label>
+    <label>{{book.isbn}}</label>
+    <br/>
+    <label><strong>URL:</strong></label>
+    <a href="{{book.url}}">Web site to buy</a>
+    <br/>
+    <label><strong>Description:</strong></label>
+    <p>{{book.description}}</p>
+  </div>
+</div>

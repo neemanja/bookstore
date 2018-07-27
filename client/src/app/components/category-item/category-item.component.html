@@ -1,0 +1,56 @@
+<app-add-category (createCategoryEvent)="createCategory($event)"></app-add-category><br/>
+<h5>List of categories</h5>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody >
+    <tr *ngFor="let category of categoryList; let i = index"> 
+      <ng-template #catEdit>
+        <td>{{i+1}}</td>
+        <td>{{category.name}}</td>
+        <td>{{category.description}}</td>
+        <td>
+            <button  class="btn btn-primary btn-xs" href="" data-toggle="modal" (click)="showEdit(category)"><i class="fa fa-pencil"></i></button>
+            <button  class="btn btn-danger btn-xs" href="" data-toggle="modal" (click)="showDeleteCategory(category)" data-target="#delete"><i class="fa fa-trash"></i></button>
+        </td>
+      </ng-template>
+      <ng-container *ngIf="editState && categoryToEdit._id == category._id; else catEdit">
+                <td>{{i+1}}</td>        
+                <td><input type="text" class="form-control" placeholder="Add Name" name="name" [(ngModel)]="categoryToEdit.name" ></td>
+                <td><input type="text" class="form-control" placeholder="Add Description" name="Description" [(ngModel)]="categoryToEdit.description"></td>
+                <td>
+                    <button  class="btn btn-primary btn-xs" href="" data-toggle="modal" (click)="saveEditCategory(categoryToEdit)"><i class="fa fa-check"></i></button>
+                    <button  class="btn btn-danger btn-xs" href="" data-toggle="modal" (click)="closeEdit()"><i class="fa fa-times"></i></button>
+                </td>
+      </ng-container>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Delete modal -->
+<div class="modal" id="delete" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Remove the Category</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure want to delete <b>"{{categoryToDelete.name}}"</b> category?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="deleteCategory()">Yes</button>
+          <button type="button" class="btn btn-secondary" id="closeDeleteModal" data-dismiss="modal">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

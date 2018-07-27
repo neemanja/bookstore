@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-md-10 mx-auto">
+    <form [formGroup]="bookForm" (ngSubmit)="addBook(book); bookForm.reset()">
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <label>Title</label>
+          <input type="text" [(ngModel)]="book.title" name="title" formControlName="title" class="form-control" placeholder="Title">
+          <div class="alert" *ngIf="!bookForm.controls['title'].valid && bookForm.controls['title'].touched">This field is required</div>
+        </div>
+        <div class="col-sm-6">
+          <label>Author</label>
+          <input type="text" [(ngModel)]="book.author" name="author" formControlName="author" class="form-control" placeholder="Author">
+          <div class="alert" *ngIf="!bookForm.controls['author'].valid && bookForm.controls['author'].touched">This field is required</div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <label>Category</label>
+          <select class="custom-select" name="category" formControlName="category" [(ngModel)]="categoryID.model" (ngModelChange)='onOptionsSelected($event)'>
+              <option *ngFor="let option of categoryID.availableOptions" [value]="option._id">{{option.name}}</option>
+          </select>
+          <!-- <input type="text" [(ngModel)]="book.category" name="category" formControlName="category" class="form-control" placeholder="Category"> -->
+          <div class="alert" *ngIf="!bookForm.controls['category'].valid && bookForm.controls['category'].touched">This field is required</div>
+        </div>
+        <div class="col-sm-6">
+          <label>Publisher</label>
+          <input type="text" [(ngModel)]="book.publisher" name="publisher" formControlName="publisher" class="form-control" placeholder="Publisher">
+          <div class="alert" *ngIf="!bookForm.controls['publisher'].valid && bookForm.controls['publisher'].touched">This field is required</div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <label>ISBN</label>
+          <input type="text" [(ngModel)]="book.isbn" name="isbn" formControlName="isbn" class="form-control" placeholder="ISBN">
+          <div class="alert" *ngIf="!bookForm.controls['isbn'].valid && bookForm.controls['isbn'].touched">This field is required</div>
+        </div>
+        <div class="col-sm-6">
+          <label>URL</label>
+          <input type="text" [(ngModel)]="book.url" name="url" formControlName="url" class="form-control" placeholder="URL">
+          <div class="alert" *ngIf="!bookForm.controls['url'].valid && bookForm.controls['url'].touched">This field is required</div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <label>Description</label>
+          <textarea type="" [(ngModel)]="book.description" name="description" formControlName="description" class="form-control" placeholder="Book Description"></textarea> 
+          <div class="alert" *ngIf="!bookForm.controls['description'].valid && bookForm.controls['description'].touched">This field is required</div>
+        </div>
+        <div class="col-sm-6">
+          <label>Cover URL</label>
+          <input type="text" [(ngModel)]="book.cover" name="cover"  formControlName="cover" class="form-control" placeholder="Cover URL">
+          <div class="alert" *ngIf="!bookForm.controls['cover'].valid && bookForm.controls['cover'].touched">This field is required</div>
+        </div>
+      </div>
+      <div class="position-right">
+          <button type="submit" [disabled]="!bookForm.valid" class="btn btn-primary" *ngIf="!isUpdate">Add</button>
+          <button type="button" [disabled]="!bookForm.valid" class="btn btn-primary" *ngIf="isUpdate" (click)="updateBook()">Update</button>
+          <button type="button" class="btn btn-secondary"  data-dismiss="modal" >Close</button>
+      </div>
+    </form>
+  </div>
+</div>
