@@ -7,6 +7,7 @@ import bb from  'express-busboy';
 import SoureMapSupport from 'source-map-support';
 
 import api from './routes/api.route';
+import passport from 'passport';
 
 const app = express();
 
@@ -34,11 +35,22 @@ mongoose.connect('mongodb://localhost/bookstore', {useMongoClient:true});
 
 SoureMapSupport.install();
 
+app.use(passport.initialize());
 app.use('/api', api);
+
 
 app.get('/', (req,res) => {
 return res.end('Api working');
 })
+
+//Autorization
+app.use((err, req, res, next) => {
+    if(err.name === 'UnauthorizedError'){
+        res.status(401);
+        res.json({'message':err.name + ': ' + err.message});
+    }
+});
+
 
 // catch 404
 app.use((req, res, next) => {

@@ -37,14 +37,21 @@ export const getBook = (req, res) => {
 }
 
 export const addBook = (req, res) => {
-    const newBook = new Book(req.body);
-    newBook.save((err, book) => {
-        if(err){
-            return res.status(400).json({status:400, 'success':false, 'message':'Some error'});
-        }
+    if(!req.payload._id){
+        res.status(401).json({'message':'UnaothorizedError'});
+    }
+    else{
+        const newBook = new Book(req.body);
+        newBook.save((err, book) => {
+            if(err){
+                return res.status(400).json({status:400, 'success':false, 'message':'Some error'});
+            }
 
-        return res.status(201).json({status:201, 'success':true, 'message':'Book added successfully', book})
-    });
+            return res.status(201).json({status:201, 'success':true, 'message':'Book added successfully', book})
+        });
+    }
+
+    
 }
 
 export const updateBook = (req, res) => {
