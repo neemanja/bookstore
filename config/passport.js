@@ -1,9 +1,9 @@
 import passport from 'passport';
-import localStrategy from 'passport-local';
+import LocalStrategy from 'passport-local';
 import mongoose from 'mongoose';
 import User from '../models/user.model';
 
-passport.use(new localStrategy({
+passport.use(new LocalStrategy({
     usernameField: 'email'
 },
 (username, password, done) => {

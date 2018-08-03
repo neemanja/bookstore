@@ -8,12 +8,12 @@ var Schema = new mongoose.Schema({
         unique: true,
         required: true
     },
-    name:{
+    name: {
         type: String,
         required: true,
         
     },
-    isAdmin:{
+    isAdmin: {
         type: Number,
         default: '0'
     },
@@ -21,17 +21,17 @@ var Schema = new mongoose.Schema({
     salt: String
 });
 
-Schema.methods.setPassword = password => {
+Schema.methods.setPassword = function(password){
     this.salt = crypto.randomBytes(16).toString('hex');
     this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
 };
 
-Schema.methods.validPassword = password => {
+Schema.methods.validPassword = function(password){
     let  hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
     return this.hash === hash;
 }
 
-Schema.methods.generateJwt = () => {
+Schema.methods.generateJwt = function(){
     let expiry = new Date();
     expiry.setDate(expiry.getDate()+1);
 

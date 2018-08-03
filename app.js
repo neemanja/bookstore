@@ -9,6 +9,8 @@ import SoureMapSupport from 'source-map-support';
 import api from './routes/api.route';
 import passport from 'passport';
 
+import './config/passport';
+
 const app = express();
 
 bb.extend(app)

@@ -1,0 +1,15 @@
+<div class="autentification-container">
+  <div class="autentification-container__link">
+    <div>
+      <a (click)="changeToRegister()">Registration</a>
+    </div>
+    <div>
+      <a (click)="changeToLogin()">Login</a>
+    </div>
+  </div>
+  <hr> 
+  <div class="autentification-container__main">
+    <app-registration *ngIf="showlogin"></app-registration>
+    <app-login *ngIf="!showlogin"></app-login>
+  </div>  
+</div>

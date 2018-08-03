@@ -3,20 +3,36 @@ import User from '../models/user.model';
 import passport from 'passport';
 
 export const register = (req, res) => {
-    const newUser = new User();
 
-    newUser.name = req.body.name;
-    newUser.email = req.body.password;
-    newUser.setPassword(req.body.password);
-
-    newUser.save(err => {
-        const token;
-        token = newUser.generateJwt();
+    User.findOne({email: req.body.email}, (err, user) => {
         if(err){
             return res.status(400).json({status:400, 'success':false, 'message':'Some error'});
         }
-        return res.status(200).json({status:200, 'success':true, 'message':'Registration successfully', token})
-    })
+
+        if(user){
+            return res.status(409).json({status:409, 'success':true, 'message':'Email is used'});
+        }
+
+        else{
+            const newUser = new User();
+
+            newUser.name = req.body.name;
+            newUser.email = req.body.email;
+            newUser.setPassword(req.body.password);
+
+            newUser.save(err => {
+                let token;
+                token = newUser.generateJwt();
+                if(err){
+                    return res.status(400).json({status:400, 'success':false, 'message':'Some error'});
+                }
+                return res.status(201).json({status:201, 'success':true, 'message':'Registration successfully', token})
+            })
+        }
+    });
+
+
+    
 }
 
 export const login = (req, res) => {
