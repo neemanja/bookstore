@@ -31,7 +31,7 @@ export class AuthenticationService {
     this.token = token;
   }
 
-  private getToken(){
+  public getToken(){
     if(!this.token){
       this.token = localStorage.getItem('bookstore-token');
     }

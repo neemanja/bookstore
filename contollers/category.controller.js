@@ -28,3 +28,13 @@ export const updateCategory = (req, res) => {
         return res.status(200).json({status:200, 'success':true, 'message':'Book updated successfully', category});
     });
 }
+
+export const deleteCategory = (req, res) => {
+    Category.findByIdAndRemove(req.params.id, (err, category)=>{
+        if(err){
+            return res.status(400).json({status:400, 'success':false, 'message':err.message});
+        }
+
+        return res.status(200).json({status:200, 'success':true, 'message':category.name + 'deleted successfuly', category});
+    })
+}

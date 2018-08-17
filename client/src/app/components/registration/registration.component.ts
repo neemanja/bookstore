@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthenticationService, TokenPayload} from '../../services/authentication.service';
-import { Router } from '@angular/router'
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-registration',
@@ -8,27 +8,31 @@ import { Router } from '@angular/router'
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
- user: TokenPayload = {
-   name: '',
-   email: '',
-   password: ''
- };
+ userForm: FormGroup;
+
+ @Output() registerUserEvent = new EventEmitter();
 
   constructor(
-    private authenticationService: AuthenticationService,
-    private router: Router
-  ) { }
+    private fb: FormBuilder
+  ) { 
+
+    this.userForm = this.fb.group({
+      'name':[null, Validators.required],
+      'email':[null, [Validators.required, Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')]],
+      'password': [null, Validators.required],
+      'repeatPassword':[null, Validators.required]
+    }, { validator: this.matchValidators});
+  }
 
   ngOnInit() {
   }
 
+  matchValidators(fg: FormGroup){
+    return fg.controls['password'].value === fg.controls['repeatPassword'].value ? null: {'mismatch':true};
+  }
+
   register(){
-    console.log('usao u register');
-    this.authenticationService.register(this.user).then( () => {
-      this.router.navigateByUrl('/browse');   
-    }).catch(err => {
-      console.log(err);
-    })
+    this.registerUserEvent.emit(this.userForm.value);
   }
 
 }

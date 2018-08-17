@@ -1,1 +1,20 @@
+.alert {
+    background: #e9ecef;
+    padding: 5px;
+    font-size: .9em;
+    color: red;
+    margin-bottom: 5px;
+    float: right;
+    animation: 2s alertAnim forwards;
+}
 
+@keyframes alertAnim {
+    from {
+        opacity:0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity:1;
+        transform: translateY(0);
+    }
+}

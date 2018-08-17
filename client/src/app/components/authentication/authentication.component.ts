@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService} from '../../services/authentication.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-authentication',
@@ -6,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./authentication.component.css']
 })
 export class AuthenticationComponent implements OnInit {
-  showlogin: boolean  = true;
+  showlogin: boolean  = false;
  
-  constructor() { }
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
@@ -19,6 +25,22 @@ export class AuthenticationComponent implements OnInit {
 
   changeToLogin(){
     this.showlogin = false;
+  }
+
+  loginUser(user){
+    this.authenticationService.login(user).then(()=> {
+      this.router.navigateByUrl('/browse');
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+  
+  registerUser(user){
+    this.authenticationService.register(user).then( () => {
+      this.router.navigateByUrl('/browse');   
+    }).catch(err => {
+      console.log(err);
+    })
   }
 
 }

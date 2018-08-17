@@ -10,7 +10,8 @@ var Schema = mongoose.Schema({
     isbn: String,
     cover: String,
     description: String,
-    url: String
+    url: String,
+    userId: String
 });
 
 export default mongoose.model('Book', Schema);

@@ -19,4 +19,7 @@ router.route('/:id')
     .get(bookController.getBook)
     .delete(bookController.deleteBook);
 
+router.route('/userBooks/:userId')
+    .get(bookController.getUserBooks);
+
 export default router;

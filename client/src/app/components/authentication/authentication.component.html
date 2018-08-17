@@ -9,7 +9,7 @@
   </div>
   <hr> 
   <div class="autentification-container__main">
-    <app-registration *ngIf="showlogin"></app-registration>
-    <app-login *ngIf="!showlogin"></app-login>
+    <app-registration *ngIf="showlogin" (registerUserEvent)="registerUser($event)" ></app-registration>
+    <app-login *ngIf="!showlogin" (loginUserEvent)="loginUser($event)"></app-login>
   </div>  
 </div>

@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthenticationService, TokenPayload} from '../../services/authentication.service';
-import { Router } from '@angular/router';
-
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms'
 
 @Component({
   selector: 'app-login',
@@ -9,25 +7,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  user: TokenPayload = {
-    email: '',
-    password: '',
-  }
+  userLoginForm: FormGroup
+
+  @Output() loginUserEvent = new EventEmitter();
 
   constructor(
-    private authenticationService: AuthenticationService,
-    private router: Router
-  ) { }
+    private fb: FormBuilder
+  ) { 
+    this.userLoginForm = this.fb.group({
+      'email': [null, [Validators.required, Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')]],
+      'password': [null, Validators.required]
+    });
+  }
 
   ngOnInit() {
   }
 
   login(){
-    this.authenticationService.login(this.user).then(()=> {
-      this.router.navigateByUrl('/browse');
-    }).catch(err => {
-      console.log(err);
-    })
+    console.log('login function' );
+    this.loginUserEvent.emit(this.userLoginForm.value);
   }
 
 }

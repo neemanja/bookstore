@@ -9,6 +9,7 @@ class Book {
     description: string;
     url: string;
     categoryDetails: any;
+    userId: string;
 
     constructor(){
         this.title = '';

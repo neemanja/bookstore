@@ -4,6 +4,7 @@ class User{
   name: string;
   exp: number;
   iat: number;
+  isAdmin:number;
 };
 
 export default User;
