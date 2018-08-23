@@ -6,6 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BookService } from './services/book.service'
 import { CategoryService } from './services/category.service';
+import { AuthenticationService } from './services/authentication.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -19,6 +21,8 @@ import { CategoryItemComponent } from './components/category-item/category-item.
 import { AddCategoryComponent } from './components/add-category/add-category.component';
 import { ShowBookComponent } from './components/show-book/show-book.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthenticationComponent } from './components/authentication/authentication.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,9 @@ import { RegistrationComponent } from './components/registration/registration.co
     CategoryItemComponent,
     AddCategoryComponent,
     ShowBookComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    LoginComponent,
+    AuthenticationComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +46,7 @@ import { RegistrationComponent } from './components/registration/registration.co
     ReactiveFormsModule,
     RouterModule.forRoot(routes, {enableTracing:true})
   ],
-  providers: [BookService, CategoryService],
+  providers: [BookService, CategoryService, AuthenticationService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

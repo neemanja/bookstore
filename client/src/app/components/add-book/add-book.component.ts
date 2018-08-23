@@ -66,7 +66,6 @@ export class AddBookComponent implements OnInit {
     this.book.category = this.categoryID.model;
   }
   
-
   onFileChange(event) {
     //this.book.cover = <File>event.target.files[0];
   }

@@ -36,15 +36,48 @@ export const getBook = (req, res) => {
     });
 }
 
-export const addBook = (req, res) => {
-    const newBook = new Book(req.body);
-    newBook.save((err, book) => {
+export const getUserBooks = (req, res) => {
+    console.log(req.params._id);
+    Book.aggregate([
+        {
+            $match : {userId:req.params.userId}
+        },
+        {$lookup:
+            {
+                from: 'categories',
+                localField: 'category',
+                foreignField: '_id',
+                as: 'categoryDetails'
+            }
+        }
+       
+    ])   
+    .exec((err, books) => {
         if(err){
-            return res.status(400).json({status:400, 'success':false, 'message':'Some error'});
+            return res.status(400).json({status:400, 'success':false, 'message':err.message});
         }
 
-        return res.status(201).json({status:201, 'success':true, 'message':'Book added successfully', book})
+        return res.status(200).json({status:200, 'success':true, 'message':'Books fetched successfully', books});
     });
+}
+
+export const addBook = (req, res) => {
+    console.log(req.body);
+    if(!req.payload._id){
+        res.status(401).json({'message':'UnaothorizedErrorrrrr'});
+    }
+    else{
+        const newBook = new Book(req.body);
+        newBook.save((err, book) => {
+            if(err){
+                return res.status(400).json({status:400, 'success':false, 'message':'Some error'});
+            }
+
+            return res.status(201).json({status:201, 'success':true, 'message':'Book added successfully', book})
+        });
+    }
+
+    
 }
 
 export const updateBook = (req, res) => {

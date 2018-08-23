@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../../services/book.service';
+import { AuthenticationService } from '../../services/authentication.service';
 import Book from '../../models/book.model';
 
 @Component({
@@ -12,20 +13,33 @@ export class UserBooksComponent implements OnInit {
   bookToDelete:Book = new Book();
   bookToEdit:Book = new Book();
 
-  constructor(private bookService: BookService) { 
+  constructor(
+    private bookService: BookService,
+    private authenticationService: AuthenticationService
+  ) { 
     
   }
 
   ngOnInit() {
-   
-    this.getAllBooks();
+   this.getAllBooks();   
   }
 
   getAllBooks(){
-    this.bookService.getBooks()
+    if(this.authenticationService.getUser().isAdmin == 1){
+      this.bookService.getBooks()
                     .then(books =>{
                       this.booksList = books.books;
                     })
+    }
+    else{
+      console.log('nije admin')
+      let userId = this.authenticationService.getUser()._id
+      this.bookService.getUserBoks(userId)
+                      .then(response => {
+                        this.booksList = response.books;
+                      })
+    }
+    
   }
 
   showDeleteBook(book){
@@ -36,7 +50,8 @@ export class UserBooksComponent implements OnInit {
     this.bookToEdit = book;
   }
 
-  createBook(book: Book){    
+  createBook(book: Book){   
+    book.userId = this.authenticationService.getUser()._id; 
     this.bookService.postBook(book)
                     .then(res => {
                       this.booksList.push(res.book);

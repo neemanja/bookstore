@@ -1,15 +1,41 @@
-<form (submit)="register()">
+<form [formGroup]="userForm" (ngSubmit)="register()">
   <div class="form-group">
-    <label for="name">Full name</label>
-    <input type="text" class="form-control" name="name" placeholder="Enter your name" [(ngModel)]="user.name">
+    <label for="name" class="cols-sm-2 control-label">Full name</label>
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+      <input type="text" class="form-control" name="name" placeholder="Enter your name" formControlName="name" >
+    </div>
+    <div class="alert" *ngIf="!userForm.controls['name'].valid && userForm.controls['name'].touched">This field is required</div>
   </div>
   <div class="form-group">
-    <label for="email">Email address</label>
-    <input type="email" class="form-control" name="email" placeholder="Enter email" [(ngModel)]="user.email">
+    <label for="email" class="cols-sm-2 control-label">Email address</label>
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+        <input type="email" class="form-control" name="email" placeholder="Enter email" formControlName="email">
+    </div>
+    <div  *ngIf="userForm.controls['email'].invalid && (userForm.controls['email'].dirty || userForm.controls['email'].touched)" >
+      <div class="alert" *ngIf="userForm.controls['email'].errors.required">This field is required</div>
+      <div class="alert" *ngIf="userForm.controls['email'].errors.pattern">Please enter the correct email</div>
+    </div>
   </div>
   <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="user.password">
+    <label for="password" class="cols-sm-2 control-label">Password</label>
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+        <input type="password" class="form-control" name="password" placeholder="Password" id="password" formControlName="password">
+    </div>
+    <div class="alert" *ngIf="!userForm.controls['password'].valid && userForm.controls['password'].touched">This field is required</div>
   </div>
-  <button type="submit" class="btn btn-default">Register!</button>
+  <div class="form-group">
+    <label for="password" class="cols-sm-2 control-label">Repeat password</label>
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+        <input type="password" class="form-control" name="repetPassword" placeholder="Repeat password" formControlName="repeatPassword">
+    </div>
+    <div class="alert" *ngIf="!userForm.controls['repeatPassword'].valid && userForm.controls['repeatPassword'].touched ">This field is required</div> 
+    <div class="alert" *ngIf="userForm.errors?.mismatch && userForm.controls['repeatPassword'].dirty">Password does not match</div>
+  </div>
+  <div class="form-group">
+    <button type="submit"  [disabled]="!userForm.valid" class="btn btn-primary btn-lg btn-block">Register</button>
+  </div>
 </form>

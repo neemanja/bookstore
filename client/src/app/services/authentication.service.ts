@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
+import User from '../models/user.model';
 
 export interface TokenPayload {
   email: string;
   password: string;
   name?: string;
-  isAdmin: number;
+  isAdmin?: number;
 }
 
 interface TokenResponse {
@@ -30,7 +31,7 @@ export class AuthenticationService {
     this.token = token;
   }
 
-  private getToken(){
+  public getToken(){
     if(!this.token){
       this.token = localStorage.getItem('bookstore-token');
     }
@@ -43,7 +44,7 @@ export class AuthenticationService {
     this.router.navigateByUrl('/');
   }
 
-  public getUser(){
+  public getUser():User{
     const token = this.getToken();
     let payload;
     if(token){
@@ -80,7 +81,17 @@ export class AuthenticationService {
   }
 
   private userRequest(type: 'login'|'register', user?: TokenPayload):Observable<any>{
-   let base = this.http.post(`/api/${type}`, user);
+  
+  let formData = new FormData();
+  formData.append('name', user.name);
+  formData.append('email', user.email);
+  formData.append('password', user.password)
+
+   let base = this.http.post(`http://localhost:3001/api/${type}`, formData);
+
+   console.log('servic parse');
+
+   console.log(base);
 
    const request = base.pipe(
       map((data: TokenResponse) => {

@@ -5,25 +5,26 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto ">
+      <span class="navbar-text"  *ngIf="auth.isLoggedIn()">
+        Hello {{auth.getUser()?.name}}
+      </span>
       <li class="nav-item active">
-        <a class="nav-link" routerLinkActive="active" routerLink="/">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="/browse">Browse</a>
+        <a class="nav-link" routerLinkActive="active" routerLink="/">Home</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a *ngIf="auth.isLoggedIn()" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Add
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Book</a>
+          <a class="dropdown-item" routerLink="/browse">Book</a>
           <a class="dropdown-item" routerLink="/addCategory">Category</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#">Login</a>
+        <a class="nav-link" *ngIf="!auth.isLoggedIn()" routerLink="/authentication">Login</a>   
+        <a class="nav-link" *ngIf="auth.isLoggedIn()" (click)="auth.logout()">Logout</a>
       </li>
     </ul>
   </div>

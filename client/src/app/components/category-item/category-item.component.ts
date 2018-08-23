@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../../services/category.service';
+import { AuthenticationService } from '../../services/authentication.service';
+
 
 @Component({
   selector: 'app-category-item',
@@ -13,7 +15,8 @@ export class CategoryItemComponent implements OnInit {
   categoryToDelete:any= [];
 
   constructor(
-   private categoryService: CategoryService
+   private categoryService: CategoryService,
+   private auth: AuthenticationService
   ) { }
 
   ngOnInit() {
@@ -55,8 +58,8 @@ export class CategoryItemComponent implements OnInit {
     this.editState = false;
   }
 
-  deleteCategory(category){
-    this.categoryService.deleteCategory(category).then(data=>{
+  deleteCategory(){
+    this.categoryService.deleteCategory(this.categoryToDelete._id).then(data=>{
       const filteredCategories = this.categoryList.filter(c => c._id !== data.category._id)
       this.categoryList = filteredCategories
       document.getElementById('closeDeleteModal').click();

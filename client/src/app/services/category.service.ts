@@ -38,8 +38,8 @@ export class CategoryService {
                .catch(this.getError)
   }
 
-  deleteCategory(category):Promise<any>{
-    return this.http.put(this.categoryApi, category)
+  deleteCategory(id):Promise<any>{
+    return this.http.delete(this.categoryApi+'/'+id)
                     .toPromise()
                     .then(this.getData)
                     .catch(this.getError)

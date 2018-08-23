@@ -7,6 +7,9 @@ import bb from  'express-busboy';
 import SoureMapSupport from 'source-map-support';
 
 import api from './routes/api.route';
+import passport from 'passport';
+
+import './config/passport';
 
 const app = express();
 
@@ -15,7 +18,7 @@ bb.extend(app)
 //alows-cors
 app.use(function(req, res, next){
     res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     next();    
 })
@@ -34,11 +37,22 @@ mongoose.connect('mongodb://localhost/bookstore', {useMongoClient:true});
 
 SoureMapSupport.install();
 
+app.use(passport.initialize());
 app.use('/api', api);
+
 
 app.get('/', (req,res) => {
 return res.end('Api working');
 })
+
+//Autorization
+app.use((err, req, res, next) => {
+    if(err.name === 'UnauthorizedError'){
+        res.status(401);
+        res.json({'message':err.name + ': ' + err.message});
+    }
+});
+
 
 // catch 404
 app.use((req, res, next) => {
