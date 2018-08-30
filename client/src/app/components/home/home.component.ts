@@ -9,6 +9,9 @@ import Book from '../../models/book.model';
 })
 export class HomeComponent implements OnInit {
   booksList: Book[];
+  bookTitle:string = '';
+  categoryId:string = '';
+  clicked: boolean = false;
 
   constructor(
     private bookService: BookService
@@ -17,8 +20,21 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.bookService.getBooks().then(books => {
       this.booksList = books.books;
-      console.log(this.booksList);
     })
+  }
+
+  bookTitleChange(title){
+    this.bookTitle = title;
+  }
+
+  CategoryIdChange(categoryId){
+    this.categoryId = categoryId;
+  }
+
+  isClicked(){
+    this.clicked = !this.clicked;
+    this.categoryId = '';
+    this.bookTitle = '';
   }
 
 }

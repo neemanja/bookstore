@@ -1,10 +1,24 @@
 <div class="container">
-  <div class="card-columns">
-    <div class="card"  *ngFor="let book of booksList">
+  <div class="card text-center">
+    <div class="card-header bg-dark">
+      <ul class="nav card-header-tabs">
+        <li class="nav-item ">
+          <a class="{{clicked ? 'nav-link bg-white text-secondary active active-link' : 'nav-link disabled ' }}" (click)="isClicked()" id="filterBook-tab" data-toggle="collapse" href="#showFilterBook" role="tab" aria-controls="filterCategory" aria-selected="true"><i class="fa fa-filter"></i> Filter</a>
+        </li>
+      </ul>
+    </div>
+    <div id="categoryTab" class="tab-content" >
+      <div class="collapse text-left" id="showFilterBook" role="tabpanel" aria-labelledby="filterBook-tab">
+        <app-book-filter [isLoad]="clicked" (bookTitleEvent)="bookTitleChange($event)" (categoryIdEvent)="CategoryIdChange($event)"></app-book-filter>
+      </div>
+    </div>
+  </div>
+  <div class="card-deck">
+    <div class="card my-3"  *ngFor="let book of booksList | bookFilter: bookTitle : categoryId">
       <img class="card-img-top" src="{{book.cover}}" alt="Book cover">
       <div class="card-body">
         <h5 class="card-title">{{book.title}}</h5>
-        <p class="card-text">{{book.description}}</p>
+        <p class="card-text">{{book.description | limitTo: 120 }}</p>
       </div>
       <div class="card-footer">
         <small class="text-muted">{{book.publisher}}</small>

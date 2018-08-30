@@ -1,0 +1,19 @@
+<form class="custom-form">
+  <div class="custom-form__element">
+      <label class="col-form-label" for="title">Title </label>
+  </div>
+  <div class="custom-form__element">
+      <input type="text" class="form-control"  placeholder="Search by book title" name="title" [(ngModel)]="title" (ngModelChange)="changeTitle($event)">
+  </div>
+  <div class="custom-form__element">
+      <label class="col-form-label" for="category">Category </label>
+  </div>
+  <div class="custom-form__element">
+      <select class="form-control " name="category"  [ngStyle]="{'-webkit-appearance': showResetBtn ? 'none' : '', '-moz-appearance': showResetBtn ? 'none' : '', 'appearance': showResetBtn ? 'none' : '' }" [(ngModel)]="categoryID.model" (ngModelChange)="CategorySelected($event)" >
+          <option *ngFor="let option of categoryID.availableOptions" [value]="option._id">{{option.name}}</option>
+      </select>
+      <button type="button" class="close posstion-close" [ngStyle]="{'display': showResetBtn ? '' : 'none' }" aria-label="Close" (click)="resetSelectCategory()">
+            <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+</form>

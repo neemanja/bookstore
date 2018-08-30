@@ -1,15 +1,17 @@
-
-<h5>Add Category</h5>
-<form class="form-inline" (ngSubmit)="addCategory(category)" >
-  <div class="form-group mx-sm-3 mb-2">
-    <label class="category-label" for="name">Name </label>
-    <input class="form-control" type="text" placeholder="Add Name" name="name" [(ngModel)]="category.name" >
+<form class="custom-form" (ngSubmit)="addCategory(category)">
+  <div class="custom-form__element">
+      <label class="col-form-label category-label" for="name">Name </label>
   </div>
-  <div class="form-group mx-sm-3 mb-2">
-    <label class="category-label">Description </label>
-    <input type="text" class="form-control" placeholder="Add Description" name="Description" [(ngModel)]="category.description">
+  <div class="custom-form__element">
+      <input type="text" class="form-control"  placeholder="Add Name" name="name" [(ngModel)]="category.name" >
   </div>
-  <div class="form-group mx-sm-3 mb-2">
-      <input type="submit" value="submit" class="btn btn-primary">
+  <div class="custom-form__element">
+      <label class="col-form-label category-label" for="Description">Description </label>
+  </div>
+  <div class="custom-form__element">
+      <input type="text" class="form-control" placeholder="Add Description" name="Description" [(ngModel)]="category.description">
+  </div>
+  <div class="custom-form__element">
+      <input type="submit" value="submit" class="btn btn-primary btn-block">
   </div>
 </form>
