@@ -1,4 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
-/*Form validations styles*/
+.custom-form{
+    display: flex;
+    flex-direction: row;
+}
+.custom-form__element{
+   margin-left: 5px; 
+   margin-right: 5px;
+}
 
-/*End form validations styles*/
+@media only screen and (max-width: 768px){
+    .custom-form{
+        flex-direction: column;
+    }
+}

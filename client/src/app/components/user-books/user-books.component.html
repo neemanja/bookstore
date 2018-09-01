@@ -1,8 +1,24 @@
-<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#addBook"><i class="fa fa-plus"  aria-hidden="true"></i>Add</button>
-<br/>
+<div class="card text-center">
+  <div class="card-header bg-dark">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item  ">
+        <a class="nav-link text-secondary" data-toggle="modal" data-target="#addBook"><i class="fa fa-plus"  aria-hidden="true"></i> Add</a>
+      </li>
+      <li class="nav-item">
+        <a  class="{{showFilter ? 'nav-link active bg-white' : 'nav-link  disabled text-secondary' }}" (click)="showHideFilters()" data-toggle="collapse" href="#showFilterCategory"><i class="fa fa-filter"  aria-hidden="true" ></i> Filter</a>
+      </li>
+    </ul>
+  </div>
+  <div id="categoryTab" class="tab-content">
+      <div class="collapsing" id="showFilterCategory" aria-expanded="true">
+          <app-book-filter [isLoad]="showFilter" (bookTitleEvent)="bookTitleChange($event)" (categoryIdEvent)="CategoryIdChange($event)"></app-book-filter> 
+      </div>
+  </div>
+</div>
 <div *ngIf="booksList?.length > 0; else noBooks">
+  <div class="table-responsive-md">
   <table class="table table-striped">
-    <thead>
+    <thead class="thead-dark">
       <tr>
         <th scope="col">#</th>
         <th scope="col">Title</th>
@@ -12,7 +28,7 @@
       </tr>
     </thead>
     <tbody >
-      <tr *ngFor="let book of booksList; let i = index">
+      <tr *ngFor="let book of booksList | bookFilter: bookTitle : categoryId; let i = index">
         <td>{{i+1}}</td>
         <td>{{book.title}}</td>
         <td *ngFor="let category of book.categoryDetails">{{category.name}}</td>
@@ -25,6 +41,7 @@
       </tr>
     </tbody>
   </table>
+</div>
 </div>
 <ng-template #noBooks>
   <h5>There are no books to list</h5>

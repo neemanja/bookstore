@@ -16,7 +16,7 @@
       <div class="form-group row">
         <div class="col-sm-6">
           <label>Category</label>
-          <select class="custom-select" name="category" formControlName="category" [(ngModel)]="categoryID.model" (ngModelChange)='onOptionsSelected($event)'>
+          <select class="form-control" name="category" formControlName="category" [(ngModel)]="categoryID.model" (ngModelChange)='onOptionsSelected($event)'>
               <option *ngFor="let option of categoryID.availableOptions" [value]="option._id">{{option.name}}</option>
           </select>
           <!-- <input type="text" [(ngModel)]="book.category" name="category" formControlName="category" class="form-control" placeholder="Category"> -->

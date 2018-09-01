@@ -23,6 +23,10 @@ import { ShowBookComponent } from './components/show-book/show-book.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthenticationComponent } from './components/authentication/authentication.component';
+import { BookFilterPipe } from './pipes/book-filter.pipe';
+import { BookFilterComponent } from './components/book-filter/book-filter.component';
+import { CategoryFilterPipe } from './pipes/category-filter.pipe';
+import { LimitToPipe } from './pipes/limit-to.pipe';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,11 @@ import { AuthenticationComponent } from './components/authentication/authenticat
     ShowBookComponent,
     RegistrationComponent,
     LoginComponent,
-    AuthenticationComponent
+    AuthenticationComponent,
+    BookFilterPipe,
+    BookFilterComponent,
+    CategoryFilterPipe,
+    LimitToPipe
   ],
   imports: [
     BrowserModule,

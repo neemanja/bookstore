@@ -1,29 +1,32 @@
-.card-columns .card {
-    display: block;
-}
-
-@media (min-width: 576px) {
-    .card-columns {
-        column-count: 3;
+@media (min-width: 0) {
+    .card-deck .card {
+      flex: 0 0 calc(100% - 30px);
     }
-}
-
-@media (min-width: 768px) {
-    .card-columns {
-        column-count: 4;
-        background-color: yellow;
+  }
+  @media (min-width: 576px) {
+    .card-deck .card {
+      flex: 0 0 calc(50% - 30px);
     }
-}
-
-@media (min-width: 992px) {
-    .card-columns {
-        column-count: 4;
+  }
+  @media (min-width: 768px) {
+    .card-deck .card {
+      flex: 0 0 calc(33.33333% - 30px);
     }
-}
-
-@media (min-width: 1200px) {
-    .card-columns {
-        column-count: 5;
+  }
+  @media (min-width: 992px) {
+    .card-deck .card {
+      flex: 0 0 calc(25% - 30px);
     }
+  }
+  @media (min-width: 1200px) {
+    .card-deck .card {
+      flex: 0 0 calc(20% - 30px);
+    }
+  }
+
+
+.active-link{
+    border-radius: 4px 4px 0px 0px;
+    margin-bottom: -2px;
 }
 

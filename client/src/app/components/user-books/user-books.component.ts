@@ -12,6 +12,9 @@ export class UserBooksComponent implements OnInit {
   booksList:Book[]
   bookToDelete:Book = new Book();
   bookToEdit:Book = new Book();
+  bookTitle:string = '';
+  categoryId:string = '';
+  showFilter:boolean = false;
 
   constructor(
     private bookService: BookService,
@@ -32,7 +35,6 @@ export class UserBooksComponent implements OnInit {
                     })
     }
     else{
-      console.log('nije admin')
       let userId = this.authenticationService.getUser()._id
       this.bookService.getUserBoks(userId)
                       .then(response => {
@@ -80,6 +82,20 @@ export class UserBooksComponent implements OnInit {
                       this.booksList = filteredBook;
                       document.getElementById('closeDeleteModal').click();
                     })
+  }
+
+  bookTitleChange(title){
+    this.bookTitle = title;
+  }
+
+  CategoryIdChange(categoryId){
+    this.categoryId = categoryId;
+  }
+
+  showHideFilters(){
+    this.bookTitle = '';
+    this.categoryId = '';
+    this.showFilter = !this.showFilter;
   }
 
 }
