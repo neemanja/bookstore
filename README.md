@@ -23,30 +23,39 @@ MongoDB – make sure it’s running on the default port(27017)
 8. Then open your browser and go to: http://localhost:4200
 
 ##App preview
-
 Home scren
-<img src=”images/home.png”> <img src=”images/home1.png”> 
-
+<p float="left">
+ <img  src="images/home.png" width="400px" > <img src="images/home1.png" width="400px" > 
+</p>
 Home scren mobile view
-<img src=”images/home_mobile.png”> <img src=”images/home_mobile1.png”> 
-
+<p float="left">
+ <img src="images/home_mobile.png" width="300" height="600"> <img src="images/home_mobile1.png" width="300" height="600"> 
+</p>
 User books
-<img src=”images/UserBook.png”> <img src=”images/userBook_mobile.png”> 
-
+<p float="left">
+ <img src="images/UserBook.png" width="400"> <img src="images/userBook_mobile.png" width="400" height="600">
+</p>
 Add book
-<img src=”images/addBook.png”> <img src=”images/addBook_mobile.png”> 
-
+<p float="left">
+ <img src="images/addBook.png" width="400"> <img src="images/addBook_mobile.png" width="300" height="600"> 
+</p>
 Edit book
-<img src=”images/EditBook.png”> <img src=”images/editBook_mobile.png”> 
-
+<p float="left">
+ <img src="images/EditBook.png" width="400"> <img src="images/editBook_mobile.png" width="300" height="600">  
+</p>
 Show book
-<img src=”images/showBook.png”> <img src=”images/showBook_mobile.png”> 
-
+<p float="left">
+ <img src="images/showBook.png" width="400"> <img src="images/showBook_mobile.png" width="300" height="600">   
+</p>
 Category book
-<img src=”images/category.png”> <img src=”images/category_mobile.png”> 
-
+<p float="left">
+ <img src="images/category.png" width="400"> <img src="images/category_mobile.png" width="300" height="600"> 
+</p>
 Login and registration
-<img src=”images/login.png”> <img src=”images/registration.png”> 
+<p float="left">
+ <img src="images/login.png" width="300" height="600"> <img src="images/registration.png" width="300" height="600"> 
+</p>
+
 
 
 
