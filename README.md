@@ -2,11 +2,11 @@
 
 Bookstore is an application which was developer by MEAN4 technology and serve for presentation of personal knowledge
 App contains tree types of users
-	1.First type is guest, who can search and look all books in our DB
-	2.Second type is registration users, who can add book, update and delete books. Registration users can update and delete only books they have added 
-	3.Third type is administration users, who have all the rights
+1. First type is guest, who can search and look all books in our DB
+2. Second type is registration users, who can add book, update and delete books. Registration users can update and delete only books they have added 
+3. Third type is administration users, who have all the rights
 
-##Instalation
+## Instalation
 
 *Prerequisites
 NodeJS
@@ -22,7 +22,7 @@ MongoDB – make sure it’s running on the default port(27017)
 7. Start the client app: ng serve
 8. Then open your browser and go to: http://localhost:4200
 
-##App preview
+## App preview
 
 Home scren
 <p float="left">
