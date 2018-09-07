@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { AuthenticationService} from '../../services/authentication.service';
 import { Router } from '@angular/router';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 
 @Component({
@@ -13,8 +14,9 @@ export class AuthenticationComponent implements OnInit {
  
   constructor(
     private authenticationService: AuthenticationService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private toast: ToastsManager
+  ) {  }
 
   ngOnInit() {
   }
@@ -28,10 +30,19 @@ export class AuthenticationComponent implements OnInit {
   }
 
   loginUser(user){
-    this.authenticationService.login(user).then(()=> {
-      this.router.navigateByUrl('/browse');
+    this.authenticationService.login(user).then((usr)=> {
+      console.log(usr);
+      if(usr.success){
+        this.toast.success(usr.message, 'Success');
+        this.router.navigateByUrl('/browse');
+      }
+      else{
+        console.log(usr);
+        this.toast.warning(usr.message, 'Warning');
+      }
+     
     }).catch(err => {
-      console.log(err);
+      this.toast.error(err.message, 'Error');
     })
   }
   
@@ -39,7 +50,7 @@ export class AuthenticationComponent implements OnInit {
     this.authenticationService.register(user).then( () => {
       this.router.navigateByUrl('/browse');   
     }).catch(err => {
-      console.log(err);
+      this.toast.error(err.message, 'Error');
     })
   }
 

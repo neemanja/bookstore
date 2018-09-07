@@ -89,10 +89,6 @@ export class AuthenticationService {
 
    let base = this.http.post(`http://localhost:3001/api/${type}`, formData);
 
-   console.log('servic parse');
-
-   console.log(base);
-
    const request = base.pipe(
       map((data: TokenResponse) => {
         if(data.token){

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../../services/category.service';
 import { AuthenticationService } from '../../services/authentication.service';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 
 @Component({
@@ -13,10 +14,12 @@ export class CategoryItemComponent implements OnInit {
   editState:boolean = false;
   categoryToEdit:any= [];
   categoryToDelete:any= [];
+  showCategory:boolean= true;
 
   constructor(
    private categoryService: CategoryService,
-   private auth: AuthenticationService
+   private auth: AuthenticationService,
+   private toast: ToastsManager
   ) { }
 
   ngOnInit() {
@@ -27,20 +30,32 @@ export class CategoryItemComponent implements OnInit {
 
   createCategory(category){
     this.categoryService.addCategory(category).then(data=>{
-      this.categoryList.push(data.category);
+      if(data.success){
+        this.categoryList.push(data.category);
+        this.toast.success(data.message, 'Success');
+      }      
+    })
+    .catch(err=>{
+      this.toast.error(err.message, 'Error');
     })
   }
 
   saveEditCategory(category){
     this.categoryService.updateCategory(category).then(data=>{
-      const updatedCategory = this.categoryList.map(cat => {
-        if(data.category._id !== cat._id){
-          return cat
-        }
-        return data.category;
-      })
-      this.categoryList = updatedCategory;
-      this.editState = false;
+      if(data.success){
+        const updatedCategory = this.categoryList.map(cat => {
+          if(data.category._id !== cat._id){
+            return cat
+          }
+          return data.category;
+        })
+        this.categoryList = updatedCategory;
+        this.editState = false;
+        this.toast.success(data.message, 'Success');
+      }
+      
+    }).catch(err=>{
+      this.toast.error(err.message, 'Error');
     })
   }
 
@@ -60,9 +75,15 @@ export class CategoryItemComponent implements OnInit {
 
   deleteCategory(){
     this.categoryService.deleteCategory(this.categoryToDelete._id).then(data=>{
-      const filteredCategories = this.categoryList.filter(c => c._id !== data.category._id)
-      this.categoryList = filteredCategories
-      document.getElementById('closeDeleteModal').click();
+      if(data.success){
+        const filteredCategories = this.categoryList.filter(c => c._id !== data.category._id)
+        this.categoryList = filteredCategories
+        document.getElementById('closeDeleteModal').click();
+        this.toast.success(data.message, 'Success');
+      }
+    })
+    .catch(err=>{
+      this.toast.error(err.message, 'Error');
     })
   }
 

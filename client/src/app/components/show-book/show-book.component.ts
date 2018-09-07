@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router, Event, NavigationEnd } from '@angular/router';
 import { BookService } from '../../services/book.service';
 import Book from '../../models/book.model';
+import { filter } from 'rxjs/operators';
 
 import 'rxjs/add/operator/switchMap';
+
+
+const isNavigationEnd = (ev: Event) => ev instanceof NavigationEnd;
+
+
 
 @Component({
   selector: 'app-show-book',
@@ -12,19 +18,29 @@ import 'rxjs/add/operator/switchMap';
 })
 export class ShowBookComponent implements OnInit {
   book: Book = new Book();
+  breadcrumbs:boolean=false;
 
   constructor(
     private bookService: BookService,
-    private route:ActivatedRoute
-  ) { }
+    private route:ActivatedRoute,
+    private router: Router
+  ) { 
+   
+  }
 
   ngOnInit() {
-    console.log('USAO OVDE ')
     this.route.paramMap.switchMap((params:ParamMap)=> 
      this.bookService.getBook(params.get('id'))).subscribe(data => {
        this.book = data.book[0];
-       console.log(this.book)
       });
+
+      const parent = this.router.url.split('/');
+      if(parent[1]=='browse'){
+        this.breadcrumbs = true;
+      }
+      
+
+
   }
 
 }

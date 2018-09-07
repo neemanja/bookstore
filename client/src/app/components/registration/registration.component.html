@@ -1,6 +1,6 @@
-<form [formGroup]="userForm" (ngSubmit)="register()">
+<form [formGroup]="userForm" class="my-3 mx-3" (ngSubmit)="register()">
   <div class="form-group">
-    <label for="name" class="cols-sm-2 control-label">Full name</label>
+    <label for="name" class="cols-sm-2 float-left control-label">Full name</label>
     <div class="input-group">
       <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
       <input type="text" class="form-control" name="name" placeholder="Enter your name" formControlName="name" >
@@ -8,7 +8,7 @@
     <div class="alert" *ngIf="!userForm.controls['name'].valid && userForm.controls['name'].touched">This field is required</div>
   </div>
   <div class="form-group">
-    <label for="email" class="cols-sm-2 control-label">Email address</label>
+    <label for="email" class="cols-sm-2 float-left control-label">Email address</label>
     <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
         <input type="email" class="form-control" name="email" placeholder="Enter email" formControlName="email">
@@ -19,7 +19,7 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="password" class="cols-sm-2 control-label">Password</label>
+    <label for="password" class="cols-sm-2 float-left control-label">Password</label>
     <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
         <input type="password" class="form-control" name="password" placeholder="Password" id="password" formControlName="password">
@@ -27,7 +27,7 @@
     <div class="alert" *ngIf="!userForm.controls['password'].valid && userForm.controls['password'].touched">This field is required</div>
   </div>
   <div class="form-group">
-    <label for="password" class="cols-sm-2 control-label">Repeat password</label>
+    <label for="password" class="cols-sm-2 float-left control-label">Repeat password</label>
     <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
         <input type="password" class="form-control" name="repetPassword" placeholder="Repeat password" formControlName="repeatPassword">

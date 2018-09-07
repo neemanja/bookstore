@@ -1,56 +1,59 @@
-<div class="card text-center">
+<h2 class="text-center">Book category</h2>
+<div class="card text-center mt-3 border-dark">
   <div class="card-header bg-dark">
     <ul class="nav nav-tabs card-header-tabs">
-      <li class="nav-item  ">
-        <a class="nav-link text-secondary active" id="addCategory-tab" data-toggle="tab" href="#addCategory" role="tab" aria-controls="addCategory" aria-selected="true"><i class="fa fa-plus"  aria-hidden="true"></i> Add</a>
+      <li class="nav-item">
+        <a class="nav-link text-secondary active" id="addCategory-tab" data-toggle="tab" href="#addCategory" role="tab" aria-controls="addCategory" (click)="showCategory = true" aria-selected="true"><i class="fa fa-plus"  aria-hidden="true"></i> Add</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-secondary"   id="filterCategory-tab" data-toggle="tab" href="#showFilterCategory" role="tab" aria-controls="filterCategory" aria-selected="false"><i class="fa fa-filter"  aria-hidden="true" ></i> Filter</a>
+        <a class="nav-link text-secondary"   id="filterCategory-tab" data-toggle="tab" href="#showFilterCategory" role="tab" aria-controls="filterCategory" (click)="showCategory = false" aria-selected="false"><i class="fa fa-filter"  aria-hidden="true" ></i> Filter</a>
       </li>
     </ul>
   </div>
   <div id="categoryTab" class="tab-content">
       <div class="tab-pane active show " id="addCategory" role="tabpanel" aria-labelledby="addCategory-tab" (createCategoryEvent)="createCategory($event)">
-         <app-add-category  (createCategoryEvent)="createCategory($event)"></app-add-category> 
+         <app-add-category [(resetCategory)]="showCategory" (createCategoryEvent)="createCategory($event)"></app-add-category> 
       </div> 
       <div class="tab-pane " id="showFilterCategory" role="tabpanel" aria-labelledby="filterCategory-tab">
         <input type="text" class="form-control" [(ngModel)]="categoryName" name="categoryName" placeholder="Search by category name" > 
       </div>
   </div>
 </div>
-<h5>List of categories</h5>
-<table class="table table-striped">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody >
-    <tr *ngFor="let category of categoryList | categoryFilter : categoryName ; let i = index"> 
-      <ng-template #catEdit>
-        <td>{{i+1}}</td>
-        <td>{{category.name}}</td>
-        <td>{{category.description}}</td>
-        <td>
-            <button  class="btn btn-primary btn-xs" href="" data-toggle="modal" (click)="showEdit(category)"><i class="fa fa-pencil"></i></button>
-            <button  class="btn btn-danger btn-xs" href="" data-toggle="modal" *ngIf="auth.getUser().isAdmin == 1" (click)="showDeleteCategory(category)" data-target="#delete"><i class="fa fa-trash"></i></button>
-        </td>
-      </ng-template>
-      <ng-container *ngIf="editState && categoryToEdit._id == category._id; else catEdit">
-                <td>{{i+1}}</td>        
-                <td><input type="text" class="form-control" placeholder="Add Name" name="name" [(ngModel)]="categoryToEdit.name" ></td>
-                <td><input type="text" class="form-control" placeholder="Add Description" name="Description" [(ngModel)]="categoryToEdit.description"></td>
-                <td>
-                    <button  class="btn btn-primary btn-xs" href="" data-toggle="modal" (click)="saveEditCategory(categoryToEdit)"><i class="fa fa-check"></i></button>
-                    <button  class="btn btn-danger btn-xs" href="" data-toggle="modal" (click)="closeEdit()"><i class="fa fa-times"></i></button>
-                </td>
-      </ng-container>
-    </tr>
-  </tbody>
-</table>
+<h5 class="my-3">List of categories</h5>
+<div class="table-responsive-md">
+  <table class="table table-striped ">
+    <thead class="bg-dark text-white">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody >
+      <tr *ngFor="let category of categoryList | categoryFilter : categoryName ; let i = index"> 
+        <ng-template #catEdit>
+          <td >{{i+1}}</td>
+          <td>{{category.name}}</td>
+          <td>{{category.description}}</td>
+          <td>   
+              <button  class="btn btn-primary btn-xs" href="" data-toggle="modal" (click)="showEdit(category)"><i class="fa fa-pencil"></i></button>
+              <button  class="btn btn-danger btn-xs" href="" data-toggle="modal" *ngIf="auth.getUser().isAdmin == 1" (click)="showDeleteCategory(category)" data-target="#delete"><i class="fa fa-trash"></i></button>
+          </td>
+        </ng-template>
+        <ng-container *ngIf="editState && categoryToEdit._id == category._id; else catEdit">
+                  <td>{{i+1}}</td>        
+                  <td><input type="text" class="form-control" placeholder="Add Name" name="name" [(ngModel)]="categoryToEdit.name" ></td>
+                  <td><input type="text" class="form-control" placeholder="Add Description" name="Description" [(ngModel)]="categoryToEdit.description"></td>
+                  <td>
+                      <button  class="btn btn-primary btn-xs" href="" data-toggle="modal" (click)="saveEditCategory(categoryToEdit)"><i class="fa fa-check"></i></button>
+                      <button  class="btn btn-danger btn-xs" href="" data-toggle="modal" (click)="closeEdit()"><i class="fa fa-times"></i></button>
+                  </td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <!-- Delete modal -->
 <div class="modal" id="delete" role="dialog">

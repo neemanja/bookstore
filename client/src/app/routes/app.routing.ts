@@ -16,6 +16,7 @@ export const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'browse', component: UserBooksComponent, canActivate:[AuthGuardService]},
     { path: 'addCategory', component: CategoryItemComponent, canActivate:[AuthGuardService] },
-    { path: 'bookDetail/:id', component: ShowBookComponent},
+    { path: 'browse/bookDetail/:id', component: ShowBookComponent},
+    { path: 'home/bookDetail/:id', component: ShowBookComponent},
     { path: 'authentication', component: AuthenticationComponent}
 ];

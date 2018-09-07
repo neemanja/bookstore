@@ -11,7 +11,6 @@ import Book from '../../models/book.model';
 })
 
 export class AddBookComponent implements OnInit {
- book:Book = new Book();
  categoryID = {
    model:null,
    availableOptions: []
@@ -19,8 +18,17 @@ export class AddBookComponent implements OnInit {
  bookForm: FormGroup;
 
  @Input() isUpdate; 
- @Input() set editBook(book){
-   this.book = book;
+ @Input() set editBook(book:Book){
+   this.bookForm.setValue({
+     title: book.title,
+     author: book.author,
+     category: book.category,
+     publisher: book.publisher,
+     isbn: book.isbn,
+     url: book.url,
+     description: book.description,
+     cover: book.cover
+   });
    this.categoryID.model = book.category;
  };
 
@@ -29,41 +37,39 @@ export class AddBookComponent implements OnInit {
 
 
   constructor(
-    private bookService: BookService,
     private categoryService: CategoryService,
     private fb: FormBuilder
   ) {
-    this.bookForm = fb.group({
+    this.bookForm = this.fb.group({
       'title' : [null, Validators.required],
       'author' : [null, Validators.required],
       'category' : [null, Validators.required],
       'publisher' : [null, Validators.required],
-      'isbn' : [null, Validators.required],
+      'isbn' : [null, [Validators.required, Validators.pattern('^(?:ISBN(?:-13)?:? )?(?=[0-9]{13}$|(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)97[89][- ]?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9]$')]],
       'url' : [null, Validators.required],
       'description' : [null, Validators.required],
       'cover' : [null, Validators.required]
     })
+    
    }
 
   ngOnInit() { 
     this.categoryService.getCategories().then(data => {
       this.categoryID.availableOptions = data.categories;
     })
+
    }
   
-
-
-  addBook(book){
-    this.createBookEvent.emit(this.book);
+  addBook(){
+    this.createBookEvent.emit(this.bookForm.value);
   }
 
   updateBook(){
-    this.updateBookEvent.emit(this.book);
-    //this.bookService.putBook(this.book);
+    this.updateBookEvent.emit(this.bookForm.value);
   }
 
-  onOptionsSelected(){
-    this.book.category = this.categoryID.model;
+  onOptionsSelected(cat){
+    this.bookForm.controls['category'].setValue(this.categoryID.model);
   }
   
   onFileChange(event) {
