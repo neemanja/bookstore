@@ -1,9 +1,10 @@
 .alert {
-    background: #f2edda;
-    padding: 7px;
+    background: #e9ecef;
+    padding: 5px;
     font-size: .9em;
-    margin-bottom: 20px;
-    display: inline-block;
+    color: red;
+    margin-bottom: 5px;
+    float: right;
     animation: 2s alertAnim forwards;
 }
 

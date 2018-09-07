@@ -9,5 +9,6 @@ router.route('/')
     .post(categoryController.addCategory);
 router.route('/:id')
     .delete(categoryController.deleteCategory)
+    .put(categoryController.changeStatus)
 
 export default router;

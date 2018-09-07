@@ -1,11 +1,12 @@
-<div class="card text-center">
+<h2 class="text-center">Your books</h2>
+<div class="card text-center  mt-3 border-dark">
   <div class="card-header bg-dark">
     <ul class="nav nav-tabs card-header-tabs">
-      <li class="nav-item  ">
-        <a class="nav-link text-secondary" data-toggle="modal" data-target="#addBook"><i class="fa fa-plus"  aria-hidden="true"></i> Add</a>
+      <li class="nav-item">
+        <a class="nav-link text-secondary" data-toggle="modal" data-target="#addBook"><i class="fa fa-plus"></i> Add</a>
       </li>
       <li class="nav-item">
-        <a  class="{{showFilter ? 'nav-link active bg-white' : 'nav-link  disabled text-secondary' }}" (click)="showHideFilters()" data-toggle="collapse" href="#showFilterCategory"><i class="fa fa-filter"  aria-hidden="true" ></i> Filter</a>
+        <a  class="{{showFilter ? 'nav-link active bg-white' : 'nav-link  disabled text-secondary' }}" (click)="showHideFilters()" data-toggle="collapse" href="#showFilterCategory"><i class="fa fa-filter"></i> Filter</a>
       </li>
     </ul>
   </div>
@@ -16,9 +17,9 @@
   </div>
 </div>
 <div *ngIf="booksList?.length > 0; else noBooks">
-  <div class="table-responsive-md">
+<div class="table-responsive-md">
   <table class="table table-striped">
-    <thead class="thead-dark">
+    <thead class="bg-dark text-white">
       <tr>
         <th scope="col">#</th>
         <th scope="col">Title</th>
@@ -30,13 +31,13 @@
     <tbody >
       <tr *ngFor="let book of booksList | bookFilter: bookTitle : categoryId; let i = index">
         <td>{{i+1}}</td>
-        <td>{{book.title}}</td>
+        <td>{{book.title | limitTo: 20}}</td>
         <td *ngFor="let category of book.categoryDetails">{{category.name}}</td>
-        <td>{{book.author}}</td>
+        <td>{{book.author | limitTo: 20}}</td>
         <td>
-          <a class="btn btn-info btn-xs" [routerLink]="['/bookDetail', book._id]"><i class="fa fa-eye"></i></a>
-          <button class="btn btn-primary btn-xs" href="" data-toggle="modal" (click)="showEditBook(book)" data-target="#editBook"><i class="fa fa-pencil"></i></button>
-          <button class="btn btn-danger btn-xs" href="" data-toggle="modal" (click)="showDeleteBook(book)" data-target="#delete"><i class="fa fa-trash"></i></button>
+          <a class="btn btn-info btn-xs" [routerLink]="['/browse/bookDetail', book._id]"><i class="fa fa-eye"></i></a>
+          <a class="btn btn-primary btn-xs" href="" data-toggle="modal" (click)="showEditBook(book)" data-target="#editBook"><i class="fa fa-pencil"></i></a>
+          <a class="btn btn-danger btn-xs" href="" data-toggle="modal" (click)="showDeleteBook(book)" data-target="#delete"><i class="fa fa-trash"></i></a>
         </td>
       </tr>
     </tbody>

@@ -3,11 +3,14 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http'
 import { HttpClientModule } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastModule } from 'ng2-toastr/ng2-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { BookService } from './services/book.service'
 import { CategoryService } from './services/category.service';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import { BookstoreMessagesService } from './services/bookstore-messages.service';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -52,9 +55,11 @@ import { LimitToPipe } from './pipes/limit-to.pipe';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes, {enableTracing:true})
+    RouterModule.forRoot(routes, {enableTracing:true}),
+    ToastModule.forRoot(),
+    BrowserAnimationsModule
   ],
-  providers: [BookService, CategoryService, AuthenticationService, AuthGuardService],
+  providers: [BookService, CategoryService, AuthenticationService, AuthGuardService, BookstoreMessagesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

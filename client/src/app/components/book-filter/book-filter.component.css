@@ -6,4 +6,8 @@
     margin-top: -30px;
     margin-right: 5px;
 }
-
+.filter-label{
+    margin-right: 5px;
+    margin-left: 5px;
+    float: left;
+}

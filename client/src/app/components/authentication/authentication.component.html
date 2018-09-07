@@ -1,15 +1,22 @@
-<div class="autentification-container">
-  <div class="autentification-container__link">
-    <div>
-      <a (click)="changeToRegister()">Registration</a>
+<div class="container">
+  <div class="card text-center my-3 border-dark">
+    <div class="card-header bg-dark ">
+      <ul class="nav nav-tabs card-header-tabs justify-content-between">
+        <li class="nav-item ">
+          <a class="nav-link text-secondary active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" (click)="showCategory = true" aria-selected="true">Login</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link text-secondary"   id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" (click)="showCategory = false" aria-selected="false">Register</a>
+        </li>
+      </ul>
     </div>
-    <div>
-      <a (click)="changeToLogin()">Login</a>
+    <div id="categoryTab" class="tab-content">
+        <div class="tab-pane active show" id="login" role="tabpanel" aria-labelledby="addCategory-tab" (createCategoryEvent)="createCategory($event)">
+            <app-login  (loginUserEvent)="loginUser($event)"></app-login>
+        </div> 
+        <div class="tab-pane" id="register" role="tabpanel" aria-labelledby="filterCategory-tab">
+            <app-registration  (registerUserEvent)="registerUser($event)" ></app-registration>
+        </div>
     </div>
   </div>
-  <hr> 
-  <div class="autentification-container__main">
-    <app-registration *ngIf="showlogin" (registerUserEvent)="registerUser($event)" ></app-registration>
-    <app-login *ngIf="!showlogin" (loginUserEvent)="loginUser($event)"></app-login>
-  </div>  
 </div>

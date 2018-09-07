@@ -39,7 +39,9 @@ export class CategoryService {
   }
 
   deleteCategory(id):Promise<any>{
-    return this.http.delete(this.categoryApi+'/'+id)
+    const formData = new FormData();
+    formData.append('status', '1');
+    return this.http.put(this.categoryApi+'/'+id, formData)
                     .toPromise()
                     .then(this.getData)
                     .catch(this.getError)

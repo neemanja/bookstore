@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { BookService } from '../../services/book.service'
+import { BookService } from '../../services/book.service';
+import { Router } from '@angular/router';
 import Book from '../../models/book.model';
+
 
 @Component({
   selector: 'app-home',
@@ -14,7 +16,8 @@ export class HomeComponent implements OnInit {
   clicked: boolean = false;
 
   constructor(
-    private bookService: BookService
+    private bookService: BookService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -35,6 +38,10 @@ export class HomeComponent implements OnInit {
     this.clicked = !this.clicked;
     this.categoryId = '';
     this.bookTitle = '';
+  }
+  
+  showBook(book: Book){
+    this.router.navigate(['/home/bookDetail', book._id]);
   }
 
 }

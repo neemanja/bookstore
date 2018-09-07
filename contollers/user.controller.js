@@ -40,7 +40,7 @@ export const login = (req, res) => {
         let token;
 
         if(err){
-            return res.status(404).json({status:404, 'success':false, 'message':'Some error'});
+            return res.status(400).json({status:404, 'success':false, 'message':'Some error'});
         }
 
         if(user){
@@ -48,7 +48,7 @@ export const login = (req, res) => {
             res.status(200).json({status:200, 'success':true, 'message':'Loggin successfully', token})        
         }
         else{
-            res.status(401).json(info);
+            res.status(200).json({status:200, 'success':false, 'message':info.message});
         }
     })(req, res);
 };

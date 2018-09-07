@@ -1,5 +1,6 @@
 <div class="container">
-  <div class="card text-center">
+  <h2 class="text-center">Searc a book in our database</h2>
+  <div class="card text-center border-dark">
     <div class="card-header bg-dark">
       <ul class="nav card-header-tabs">
         <li class="nav-item ">
@@ -14,7 +15,7 @@
     </div>
   </div>
   <div class="card-deck">
-    <div class="card my-3"  *ngFor="let book of booksList | bookFilter: bookTitle : categoryId">
+    <div class="card my-3"  *ngFor="let book of booksList | bookFilter: bookTitle : categoryId" (click)="showBook(book)">
       <img class="card-img-top" src="{{book.cover}}" alt="Book cover">
       <div class="card-body">
         <h5 class="card-title">{{book.title}}</h5>

@@ -1,15 +1,15 @@
-<nav aria-label="breadcrumb">
+<nav  aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-      <li class="breadcrumb-item"><a routerLink="/browse">Browse</a></li>
+      <li *ngIf="breadcrumbs" class="breadcrumb-item"><a routerLink="/browse">Browse</a></li>
       <li class="breadcrumb-item active" aria-current="page">Book detail</li>
     </ol>
 </nav>
 <div class="row">
-  <div class="col-sm-4">
+  <div class="col-md-5 col-sm col-lg-4">
    <img src="{{book.cover}}" alt="Book cover">
   </div>
-  <div class="col-sm-8">
+  <div class="col-md-7 col-sm col-lg-8">
     <h4>{{book.title}}</h4>
     <label><strong>Autor:</strong></label>
     <label>{{book.author}}</label>
