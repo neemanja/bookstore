@@ -1,6 +1,6 @@
 ﻿# Bookstore
 
-Bookstore is an application which was developer by MEAN4 technology and serve for presentation of personal knowledge
+Bookstore is an application which was developed with MEAN4 technology and exists for practice and presentation of personal knowledge
 App contains tree types of users
 1. First type is guest, who can search and look all books in our DB
 2. Second type is registration users, who can add book, update and delete books. Registration users can update and delete only books they have added 
