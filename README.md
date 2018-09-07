@@ -23,6 +23,7 @@ MongoDB – make sure it’s running on the default port(27017)
 8. Then open your browser and go to: http://localhost:4200
 
 ##App preview
+
 Home scren
 <p float="left">
  <img  src="images/home.png" width="400px" > <img src="images/home1.png" width="400px" > 
