@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
@@ -9,6 +9,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RegistrationComponent implements OnInit {
  userForm: FormGroup;
+
+
+ @Input() set resetRegister(show){
+   if(show){
+     this.userForm.reset();
+   }
+ }
 
  @Output() registerUserEvent = new EventEmitter();
 

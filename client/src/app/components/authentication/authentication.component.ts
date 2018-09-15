@@ -10,7 +10,8 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
   styleUrls: ['./authentication.component.css']
 })
 export class AuthenticationComponent implements OnInit {
-  showlogin: boolean  = false;
+  showLogin: boolean  = false;
+  showRegister: boolean = false;
  
   constructor(
     private authenticationService: AuthenticationService,
@@ -19,14 +20,6 @@ export class AuthenticationComponent implements OnInit {
   ) {  }
 
   ngOnInit() {
-  }
-
-  changeToRegister(){
-    this.showlogin = true;
-  }
-
-  changeToLogin(){
-    this.showlogin = false;
   }
 
   loginUser(user){

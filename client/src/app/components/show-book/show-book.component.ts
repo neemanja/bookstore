@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router, Event, NavigationEnd } from '@angular/router';
 import { BookService } from '../../services/book.service';
 import Book from '../../models/book.model';
-import { filter } from 'rxjs/operators';
 
 import 'rxjs/add/operator/switchMap';
 

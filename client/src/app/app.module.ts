@@ -10,7 +10,6 @@ import { BookService } from './services/book.service'
 import { CategoryService } from './services/category.service';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthGuardService } from './services/auth-guard.service';
-import { BookstoreMessagesService } from './services/bookstore-messages.service';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -59,7 +58,7 @@ import { LimitToPipe } from './pipes/limit-to.pipe';
     ToastModule.forRoot(),
     BrowserAnimationsModule
   ],
-  providers: [BookService, CategoryService, AuthenticationService, AuthGuardService, BookstoreMessagesService],
+  providers: [BookService, CategoryService, AuthenticationService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
