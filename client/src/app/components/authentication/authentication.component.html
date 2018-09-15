@@ -3,19 +3,19 @@
     <div class="card-header bg-dark ">
       <ul class="nav nav-tabs card-header-tabs justify-content-between">
         <li class="nav-item ">
-          <a class="nav-link text-secondary active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" (click)="showCategory = true" aria-selected="true">Login</a>
+          <a class="nav-link text-secondary active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" (click)="showLogin = true; showRegister=false" aria-selected="true">Login</a>
         </li>
         <li class="nav-item ">
-          <a class="nav-link text-secondary"   id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" (click)="showCategory = false" aria-selected="false">Register</a>
+          <a class="nav-link text-secondary"   id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" (click)="showRegister = true; showLogin = false" aria-selected="false">Register</a>
         </li>
       </ul>
     </div>
     <div id="categoryTab" class="tab-content">
         <div class="tab-pane active show" id="login" role="tabpanel" aria-labelledby="addCategory-tab" (createCategoryEvent)="createCategory($event)">
-            <app-login  (loginUserEvent)="loginUser($event)"></app-login>
+            <app-login [(resetLogin)]="showLogin" (loginUserEvent)="loginUser($event)"></app-login>
         </div> 
         <div class="tab-pane" id="register" role="tabpanel" aria-labelledby="filterCategory-tab">
-            <app-registration  (registerUserEvent)="registerUser($event)" ></app-registration>
+            <app-registration [(resetRegister)]="showRegister" (registerUserEvent)="registerUser($event)" ></app-registration>
         </div>
     </div>
   </div>

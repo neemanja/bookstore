@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms'
 
 @Component({
@@ -8,6 +8,12 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms'
 })
 export class LoginComponent implements OnInit {
   userLoginForm: FormGroup
+
+  @Input() set resetLogin(show){
+    if(show){
+      this.userLoginForm.reset();
+    }
+  }
 
   @Output() loginUserEvent = new EventEmitter();
 
